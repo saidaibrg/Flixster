@@ -13,14 +13,16 @@ class FrequentMovie {
     var popularity = 0
 
     @JvmField
-    @SerializedName("title")
+    @SerializedName("original_title")
     var title: String? = null
+
+    @JvmField
+    @SerializedName("poster_path")
+    var moveImageUrl: String? = null
 
     @JvmField
     @SerializedName("overview")
     var overview: String? = null
 
-    //TODO bookImageUrl
-    //TODO description
 
 }

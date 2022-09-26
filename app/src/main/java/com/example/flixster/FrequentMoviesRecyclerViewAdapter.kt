@@ -3,10 +3,12 @@ package com.example.flixster
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
- class FrequentMoviesRecyclerViewAdapter(
+class FrequentMoviesRecyclerViewAdapter(
     private val movies: List<FrequentMovie>,
     private val mListener: FrequentMovieFragment
 )
@@ -14,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 {
     /**
-     * [RecyclerView.Adapter] that can display a [BestSellerBook] and makes a call to the
+     * [RecyclerView.Adapter] that can display a [FrequentMovie] and makes a call to the
      * specified [OnListFragmentInteractionListener].
      */
 
@@ -32,7 +34,8 @@ import androidx.recyclerview.widget.RecyclerView
         var mItem: FrequentMovie? = null
         val mMovieTitle: TextView = mView.findViewById<View>(R.id.movie_title) as TextView
         val mMovieOverview: TextView = mView.findViewById<View>(R.id.movie_overview) as TextView
-
+        val mMovieImage: ImageView = mView.findViewById<View>(R.id.movie_image) as ImageView
+        val mBookRanking: TextView = mView.findViewById<View>(R.id.ranking) as TextView
 
         override fun toString(): String {
             return mMovieTitle.toString() + " '" + mMovieOverview.text + "'"
@@ -48,12 +51,17 @@ import androidx.recyclerview.widget.RecyclerView
         holder.mItem = movie
         holder.mMovieTitle.text = movie.title
         holder.mMovieOverview.text = movie.overview
+        holder.mBookRanking.text = movie.popularity.toString()
 
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
                 mListener?.onItemClick(book)
             }
         }
+        Glide.with(holder.mView)
+            .load("https://image.tmdb.org/t/p/w500"+movie.moveImageUrl)
+            .centerInside()
+            .into(holder.mMovieImage)
     }
 
     /**
