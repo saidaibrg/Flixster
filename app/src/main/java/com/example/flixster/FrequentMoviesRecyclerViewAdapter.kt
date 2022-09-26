@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FrequentMoviesRecyclerViewAdapter (
-    private val books: List<FrequentMovie>,
-    private val mListener: OnListFragmentInteractionListener?
+ class FrequentMoviesRecyclerViewAdapter(
+    private val movies: List<FrequentMovie>,
+    private val mListener: FrequentMovieFragment
 )
-    : RecyclerView.Adapter<FrequentMoviesRecyclerViewAdapter.BookViewHolder>()
+    : RecyclerView.Adapter<FrequentMoviesRecyclerViewAdapter.MovieViewHolder>()
 
 {
     /**
@@ -18,35 +18,36 @@ class FrequentMoviesRecyclerViewAdapter (
      * specified [OnListFragmentInteractionListener].
      */
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_frequent_movie, parent, false)
-        return BookViewHolder(view)
+        return MovieViewHolder(view)
     }
 
     /**
      * This inner class lets us refer to all the different View elements
      * (Yes, the same ones as in the XML layout files!)
      */
-    inner class BookViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class MovieViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         var mItem: FrequentMovie? = null
-        val mBookTitle: TextView = mView.findViewById<View>(id.movie_title) as TextView
-        val mBookAuthor: TextView = mView.findViewById<View>(id.movie_author) as TextView
+        val mMovieTitle: TextView = mView.findViewById<View>(R.id.movie_title) as TextView
+        val mMovieOverview: TextView = mView.findViewById<View>(R.id.movie_overview) as TextView
+
 
         override fun toString(): String {
-            return mBookTitle.toString() + " '" + mBookAuthor.text + "'"
+            return mMovieTitle.toString() + " '" + mMovieOverview.text + "'"
         }
     }
 
     /**
      * This lets us "bind" each Views in the ViewHolder to its' actual data!
      */
-    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        val book = books[position]
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        val movie = movies[position]
 
-        holder.mItem = book
-        holder.mBookTitle.text = book.title
-        holder.mBookAuthor.text = book.author
+        holder.mItem = movie
+        holder.mMovieTitle.text = movie.title
+        holder.mMovieOverview.text = movie.overview
 
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
@@ -59,7 +60,7 @@ class FrequentMoviesRecyclerViewAdapter (
      * Remember: RecyclerView adapters require a getItemCount() method.
      */
     override fun getItemCount(): Int {
-        return books.size
+        return movies.size
     }
 }
 

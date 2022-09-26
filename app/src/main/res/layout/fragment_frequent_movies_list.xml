@@ -16,6 +16,8 @@ android:layout_height="match_parent">
     tools:context=".BestSellerBooksFragment"
     tools:listitem="@layout/fragment_frequent_movies_list" />
 
+    //description, title, image
+
 <androidx.core.widget.ContentLoadingProgressBar
     android:id="@+id/progress"
     style="?android:attr/progressBarStyleLarge"

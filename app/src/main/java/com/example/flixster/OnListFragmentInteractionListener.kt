@@ -1,7 +1,5 @@
 package com.example.flixster
 
-class OnListFragmentInteractionListener {
-    fun onItemClick(book: FrequentMovie) {
-
-    }
+interface OnListFragmentInteractionListener {
+     fun onItemClick(item: FrequentMovie)
 }

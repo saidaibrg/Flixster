@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val supportFragmentManager = supportFragmentManager
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id.content, FrequentMovieFragment(), null).commit()
+        fragmentTransaction.replace(R.id.content, FrequentMovieFragment(), null).commit()
 
     }
 }
